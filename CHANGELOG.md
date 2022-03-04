@@ -1,5 +1,13 @@
 # Changelog
 
+## \[0.14.0]
+
+- Enable tab navigation on macOS.
+  - [28ebedc](https://github.com/tauri-apps/wry/commit/28ebedc41f9017fed3fe1dc3a6d021c69f88ef5d) fix(macOS): enable tab navigation on all elements, fixes [#406](https://github.com/tauri-apps/wry/pull/406) ([#512](https://github.com/tauri-apps/wry/pull/512)) on 2022-03-03
+- - Expose methods to access the underlying native handles of the webview.
+- **Breaking change**: `WebviewExtWindows::controller` now returns the controller directley and not wrapped in an `Option`
+- [e54afec](https://github.com/tauri-apps/wry/commit/e54afec43b767ffdb43debbd526d249c3c5b5490) feat: expose webview native handles, closes [#495](https://github.com/tauri-apps/wry/pull/495) ([#513](https://github.com/tauri-apps/wry/pull/513)) on 2022-03-03
+
 ## \[0.13.3]
 
 - Fix rustdoc generation of Windows and Mac on docs.rs.
