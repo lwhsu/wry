@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-License-Identifier: MIT
 
-#[cfg(any(target_os = "macos", target_os = "windows", target_os = "linux"))]
+#[cfg(any(target_os = "macos", target_os = "windows", target_os = "linux", target_os = "freebsd"))]
 #[cfg(any(feature = "tray", feature = "ayatana"))]
 fn main() -> wry::Result<()> {
   use std::collections::HashMap;
@@ -191,7 +191,7 @@ fn main() {
 }
 
 // Tray feature flag disabled but can be available.
-#[cfg(any(target_os = "windows", target_os = "linux", target_os = "macos"))]
+#[cfg(any(target_os = "windows", target_os = "linux", target_os = "macos", target_os = "freebsd"))]
 #[cfg(not(any(feature = "tray", feature = "ayatana")))]
 fn main() {
   println!("This platform doesn't have the `tray` or `ayatana` feature enabled.");

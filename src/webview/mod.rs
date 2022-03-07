@@ -446,13 +446,13 @@ impl WebviewExtWindows for WebView {
 }
 
 /// Additional methods on `WebView` that are specific to Linux.
-#[cfg(target_os = "linux")]
+#[cfg(any(target_os = "linux", target_os = "freebsd"))]
 pub trait WebviewExtUnix {
   /// Returns Webkit2gtk Webview handle
   fn webview(&self) -> Rc<webkit2gtk::WebView>;
 }
 
-#[cfg(target_os = "linux")]
+#[cfg(any(target_os = "linux", target_os = "freebsd"))]
 impl WebviewExtUnix for WebView {
   fn webview(&self) -> Rc<webkit2gtk::WebView> {
     self.webview.webview.clone()

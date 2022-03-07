@@ -2,17 +2,17 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-License-Identifier: MIT
 
-#[cfg(any(target_os = "macos", target_os = "windows", target_os = "linux"))]
+#[cfg(any(target_os = "macos", target_os = "windows", target_os = "linux", target_os = "freebsd"))]
 #[cfg(any(feature = "tray", feature = "ayatana"))]
 fn main() -> wry::Result<()> {
   use std::collections::HashMap;
-  #[cfg(target_os = "linux")]
+  #[cfg(any(target_os = "linux", target_os = "freebsd"))]
   use std::path::Path;
   #[cfg(target_os = "macos")]
   use wry::application::platform::macos::{
     ActivationPolicy, CustomMenuItemExtMacOS, EventLoopExtMacOS, NativeImage,
   };
-  #[cfg(target_os = "linux")]
+  #[cfg(any(target_os = "linux", target_os = "freebsd"))]
   use wry::application::platform::unix::WindowBuilderExtUnix;
   #[cfg(target_os = "windows")]
   use wry::application::platform::windows::WindowBuilderExtWindows;
@@ -84,7 +84,7 @@ fn main() -> wry::Result<()> {
   #[cfg(target_os = "macos")]
   let icon = include_bytes!("icon.png").to_vec();
   // Linux require Pathbuf to PNG file
-  #[cfg(target_os = "linux")]
+  #[cfg(any(target_os = "linux", target_os = "freebsd"))]
   let icon = Path::new(env!("CARGO_MANIFEST_DIR")).join("examples/icon.png");
 
   // Windows require Vec<u8> ICO file
@@ -94,7 +94,7 @@ fn main() -> wry::Result<()> {
   #[cfg(target_os = "macos")]
   let new_icon = include_bytes!("icon_dark.png").to_vec();
   // Linux require Pathbuf to PNG file
-  #[cfg(target_os = "linux")]
+  #[cfg(any(target_os = "linux", target_os = "freebsd"))]
   let new_icon = Path::new(env!("CARGO_MANIFEST_DIR")).join("examples/icon_dark.png");
 
   let mut system_tray = SystemTrayBuilder::new(icon.clone(), Some(tray_menu))
@@ -120,7 +120,7 @@ fn main() -> wry::Result<()> {
         .unwrap();
 
       // create our new window / webview instance
-      #[cfg(any(target_os = "windows", target_os = "linux"))]
+      #[cfg(any(target_os = "windows", target_os = "linux", target_os = "freebsd"))]
       let window_builder = WindowBuilder::new().with_skip_taskbar(true);
       #[cfg(target_os = "macos")]
       let window_builder = WindowBuilder::new();
